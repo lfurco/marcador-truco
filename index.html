@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Marcador de Truco</title>
+  <meta name="description" content="Marcador de truco simples, feito para usar na mesa pelo celular. Ajuste o placar com controles de pontos, truco, seis, nove e doze.">
+  <meta name="theme-color" content="#1e1a17">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🃏</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Instrument+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topo">
+      <h1>Truco <span>marcador</span></h1>
+    </header>
+
+    <main class="mesa">
+      <section class="time" data-time="0">
+        <input class="nome" value="Nós" maxlength="12" autocomplete="off" aria-label="Nome do time 1">
+        <p class="vitorias">0 partidas ganhas</p>
+        <output class="pontos" aria-live="polite">0</output>
+        <div class="palitos" aria-hidden="true"></div>
+        <div class="botoes" role="group" aria-label="Ajustar pontos para o time 1">
+          <button class="um" data-pontos="1" aria-label="Somar 1 ponto"><b>+1</b><small>ponto</small></button>
+          <button class="menos" data-diminuir aria-label="Diminuir 1 ponto"><b>−1</b><small>ponto</small></button>
+          <button data-pontos="3" aria-label="Somar 3 pontos, truco"><b>+3</b><small>truco</small></button>
+          <button data-pontos="6" aria-label="Somar 6 pontos, seis"><b>+6</b><small>seis</small></button>
+          <button data-pontos="9" aria-label="Somar 9 pontos, nove"><b>+9</b><small>nove</small></button>
+          <button data-pontos="12" aria-label="Somar 12 pontos, doze"><b>+12</b><small>doze</small></button>
+        </div>
+      </section>
+
+      <section class="time" data-time="1">
+        <input class="nome" value="Eles" maxlength="12" autocomplete="off" aria-label="Nome do time 2">
+        <p class="vitorias">0 partidas ganhas</p>
+        <output class="pontos" aria-live="polite">0</output>
+        <div class="palitos" aria-hidden="true"></div>
+        <div class="botoes" role="group" aria-label="Ajustar pontos para o time 2">
+          <button class="um" data-pontos="1" aria-label="Somar 1 ponto"><b>+1</b><small>ponto</small></button>
+          <button class="menos" data-diminuir aria-label="Diminuir 1 ponto"><b>−1</b><small>ponto</small></button>
+          <button data-pontos="3" aria-label="Somar 3 pontos, truco"><b>+3</b><small>truco</small></button>
+          <button data-pontos="6" aria-label="Somar 6 pontos, seis"><b>+6</b><small>seis</small></button>
+          <button data-pontos="9" aria-label="Somar 9 pontos, nove"><b>+9</b><small>nove</small></button>
+          <button data-pontos="12" aria-label="Somar 12 pontos, doze"><b>+12</b><small>doze</small></button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="rodape">
+      <button id="nova" type="button">Nova partida</button>
+      <button id="zerar" type="button" class="discreto">Zerar vitórias</button>
+    </footer>
+  </div>
+
+  <dialog id="vitoria" aria-labelledby="vitoria-titulo">
+    <h2 id="vitoria-titulo"></h2>
+    <p id="vitoria-placar"></p>
+    <div class="acoes">
+      <button id="corrigir" type="button">−1 ponto</button>
+      <button id="proxima" type="button" class="principal">Próxima partida</button>
+    </div>
+  </dialog>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

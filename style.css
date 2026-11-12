@@ -1,0 +1,324 @@
+:root {
+  --mesa: #1e1a17;
+  --superficie: #2a2420;
+  --botao: #352d27;
+  --giz: #efe6d2;
+  --giz-suave: rgba(239, 230, 210, 0.68);
+  --linha: rgba(239, 230, 210, 0.16);
+  --madeira: #d8b06c;
+  --madeira-escura: #b88a45;
+  --cor0: #d8402f;
+  --cor1: #2aa198;
+  --fonte-titulo: "Bricolage Grotesque", system-ui, sans-serif;
+  --fonte-texto: "Instrument Sans", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: radial-gradient(120% 80% at 50% 0%, #2c231c 0%, var(--mesa) 62%);
+  color: var(--giz);
+  font-family: var(--fonte-texto);
+  font-weight: 500;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app {
+  width: min(100%, 760px);
+  min-height: 100dvh;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Topo */
+.topo {
+  padding: calc(14px + env(safe-area-inset-top)) 18px 6px;
+}
+
+.topo h1 {
+  margin: 0;
+  font: 800 1.25rem/1.2 var(--fonte-titulo);
+}
+
+.topo h1 span {
+  margin-left: 6px;
+  font-weight: 700;
+  color: var(--giz-suave);
+}
+
+/* Times */
+.mesa {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-content: start;
+  padding: 8px 14px;
+}
+
+.time {
+  --cor: var(--cor0);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 12px 14px;
+  background: var(--superficie);
+  border: 1px solid var(--linha);
+  border-radius: 20px;
+}
+
+.time[data-time="1"] {
+  --cor: var(--cor1);
+}
+
+.nome {
+  width: 100%;
+  padding: 2px 0 6px;
+  background: transparent;
+  border: 0;
+  border-bottom: 3px solid var(--cor);
+  border-radius: 0;
+  color: var(--giz);
+  font: 800 1.35rem/1.2 var(--fonte-titulo);
+}
+
+.nome:focus-visible {
+  outline: 2px solid var(--giz);
+  outline-offset: 4px;
+}
+
+.vitorias {
+  margin: 0;
+  color: var(--giz-suave);
+  font-size: 0.85rem;
+}
+
+.pontos {
+  display: block;
+  margin-top: 2px;
+  font: 800 clamp(5.5rem, 30vw, 9rem) / 0.9 var(--fonte-titulo);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+}
+
+/* Palitos de fósforo: cada ponto acende um palito */
+.palitos {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px 2px;
+  padding: 8px 0 4px;
+}
+
+.palito {
+  position: relative;
+  justify-self: center;
+  width: 9px;
+  height: clamp(36px, 11vw, 52px);
+  border: 1.5px dashed var(--linha);
+  border-radius: 3px 3px 4px 4px;
+}
+
+.palito:nth-child(3n + 1) {
+  rotate: -2deg;
+}
+
+.palito:nth-child(3n + 2) {
+  rotate: 1.5deg;
+}
+
+.palito::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -3px;
+  right: -3px;
+  height: 13px;
+  border-radius: 50% 50% 46% 46%;
+  background: var(--cor);
+  opacity: 0;
+}
+
+.palito.aceso {
+  border-color: transparent;
+  background: linear-gradient(90deg, var(--madeira), var(--madeira-escura));
+}
+
+.palito.aceso::before {
+  opacity: 1;
+}
+
+.palito.novo {
+  animation: acende 0.4s cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+
+@keyframes acende {
+  from {
+    scale: 0.4;
+    opacity: 0;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}
+
+/* Botões */
+button {
+  font: inherit;
+  color: var(--giz);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--giz);
+  outline-offset: 3px;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.botoes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.botoes button {
+  min-height: 58px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 2px;
+  padding: 6px;
+  background: var(--botao);
+  border: 1px solid var(--linha);
+  border-radius: 14px;
+}
+
+.botoes b {
+  font: 800 1.5rem/1 var(--fonte-titulo);
+}
+
+.botoes small {
+  font-size: 0.78rem;
+  color: var(--giz-suave);
+}
+
+.botoes button:active:not(:disabled) {
+  transform: translateY(1px);
+  background: color-mix(in srgb, var(--cor) 38%, var(--botao));
+}
+
+@media (hover: hover) {
+  .botoes button:hover:not(:disabled) {
+    border-color: color-mix(in srgb, var(--cor) 75%, transparent);
+  }
+}
+
+/* Rodapé */
+.rodape {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 14px calc(14px + env(safe-area-inset-bottom));
+}
+
+.rodape button {
+  min-height: 48px;
+  padding: 0 18px;
+  border-radius: 14px;
+  font-weight: 700;
+}
+
+#nova {
+  flex: 1;
+  background: transparent;
+  border: 1px solid var(--linha);
+}
+
+.rodape .discreto {
+  min-height: 44px;
+  padding: 0 4px;
+  background: none;
+  border: 0;
+  color: var(--giz-suave);
+  font-weight: 500;
+  font-size: 0.85rem;
+  text-decoration: underline;
+}
+
+/* Fim de partida */
+dialog {
+  --cor: var(--cor0);
+  width: min(92vw, 380px);
+  padding: 26px 22px 22px;
+  background: var(--superficie);
+  color: var(--giz);
+  border: 1px solid var(--linha);
+  border-top: 6px solid var(--cor);
+  border-radius: 22px;
+}
+
+dialog[data-time="1"] {
+  --cor: var(--cor1);
+}
+
+dialog::backdrop {
+  background: rgba(10, 8, 6, 0.72);
+}
+
+dialog h2 {
+  margin: 0 0 6px;
+  font: 800 2rem/1.1 var(--fonte-titulo);
+}
+
+dialog p {
+  margin: 0 0 22px;
+  color: var(--giz-suave);
+  font-size: 1.05rem;
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.acoes button {
+  flex: 1 1 140px;
+  min-height: 50px;
+  padding: 0 16px;
+  background: transparent;
+  border: 1px solid var(--linha);
+  border-radius: 14px;
+  font-weight: 700;
+}
+
+.acoes .principal {
+  background: var(--giz);
+  border-color: var(--giz);
+  color: var(--mesa);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
